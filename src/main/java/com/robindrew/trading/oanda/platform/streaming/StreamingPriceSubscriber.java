@@ -3,12 +3,9 @@ package com.robindrew.trading.oanda.platform.streaming;
 import static com.google.common.collect.ImmutableList.copyOf;
 import static com.robindrew.common.io.BufferedReaderIterable.lines;
 import static com.robindrew.common.util.Check.notEmpty;
-import static com.robindrew.trading.oanda.OandaInstrument.SPOT_EUR_USD;
-import static com.robindrew.trading.oanda.OandaInstrument.SPOT_USD_JPY;
 
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.http.HttpEntity;
@@ -19,33 +16,16 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Sets;
 import com.robindrew.common.util.Check;
 import com.robindrew.common.util.Quietly;
 import com.robindrew.trading.httpclient.HttpClientException;
 import com.robindrew.trading.httpclient.HttpClientExecutor;
 import com.robindrew.trading.oanda.IOandaInstrument;
-import com.robindrew.trading.oanda.platform.OandaCredentials;
-import com.robindrew.trading.oanda.platform.OandaEnvironment;
 import com.robindrew.trading.oanda.platform.OandaSession;
 
 public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implements AutoCloseable {
 
 	private static final Logger log = LoggerFactory.getLogger(StreamingPriceSubscriber.class);
-
-	public static void main(String[] args) {
-
-		String accountId = "";
-		String token = "";
-
-		OandaCredentials credentials = new OandaCredentials(accountId, token);
-		OandaSession session = new OandaSession(credentials, OandaEnvironment.DEMO);
-
-		Set<IOandaInstrument> instruments = Sets.newHashSet(SPOT_EUR_USD, SPOT_USD_JPY);
-		try (StreamingPriceSubscriber subscriber = new StreamingPriceSubscriber(session, instruments)) {
-			subscriber.execute();
-		}
-	}
 
 	private final OandaSession session;
 	private final Collection<? extends IOandaInstrument> instruments;
