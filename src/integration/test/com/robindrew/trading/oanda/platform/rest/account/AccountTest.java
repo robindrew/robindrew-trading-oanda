@@ -6,7 +6,6 @@ import com.oanda.v20.Context;
 import com.oanda.v20.account.AccountProperties;
 import com.oanda.v20.account.AccountSummaryResponse;
 import com.oanda.v20.primitives.DateTime;
-import com.robindrew.common.text.Strings;
 import com.robindrew.trading.log.ITransactionLog;
 import com.robindrew.trading.log.StubTransactionLog;
 import com.robindrew.trading.oanda.platform.IOandaSession;
