@@ -4,6 +4,8 @@ import static com.robindrew.trading.Instruments.*;
 
 import com.robindrew.trading.IInstrument;
 import com.robindrew.trading.Instrument;
+import com.robindrew.trading.provider.ITradeDataProvider;
+import com.robindrew.trading.provider.TradeDataProvider;
 
 public class OandaInstrument extends Instrument implements IOandaInstrument {
 
@@ -275,6 +277,11 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 
 	public OandaInstrument(String name, IInstrument underlying) {
 		super(name, underlying);
+	}
+
+	@Override
+	public ITradeDataProvider getProvider() {
+		return TradeDataProvider.OANDA;
 	}
 
 }
