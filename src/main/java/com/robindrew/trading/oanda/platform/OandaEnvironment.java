@@ -7,20 +7,20 @@ public enum OandaEnvironment {
 	/** Demo Environment. */
 	DEMO("https://api-fxpractice.oanda.com", "https://stream-fxpractice.oanda.com");
 
-	private final String restDomain;
-	private final String streamDomain;
+	private final String restUrl;
+	private final String streamUrl;
 
-	private OandaEnvironment(String restDomain, String streamDomain) {
-		this.restDomain = restDomain;
-		this.streamDomain = streamDomain;
+	private OandaEnvironment(String restUrl, String streamUrl) {
+		this.restUrl = restUrl;
+		this.streamUrl = streamUrl;
 	}
 
-	public String getStreamDomain() {
-		return streamDomain;
+	public String getStreamUrl() {
+		return streamUrl;
 	}
 
-	public String getRestDomain() {
-		return restDomain;
+	public String getRestUrl() {
+		return restUrl;
 	}
 
 }

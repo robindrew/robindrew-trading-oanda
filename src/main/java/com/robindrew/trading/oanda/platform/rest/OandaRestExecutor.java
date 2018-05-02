@@ -27,6 +27,7 @@ public abstract class OandaRestExecutor<R> extends HttpClientExecutor<R> {
 		this.service = Check.notNull("service", service);;
 	}
 
+	@Override
 	public String getName() {
 		String name = getClass().getSimpleName();
 		if (name.endsWith("Executor")) {
@@ -47,7 +48,7 @@ public abstract class OandaRestExecutor<R> extends HttpClientExecutor<R> {
 		if (!path.startsWith("/")) {
 			throw new IllegalArgumentException("path: '" + path + "'");
 		}
-		return getSession().getEnvironment().getRestDomain() + path;
+		return getSession().getEnvironment().getRestUrl() + path;
 	}
 
 	protected void addHeaders(HttpUriRequest request) {

@@ -14,19 +14,23 @@ public class OandaSession implements IOandaSession {
 		this.environment = Check.notNull("environment", environment);
 	}
 
+	@Override
 	public OandaCredentials getCredentials() {
 		return credentials;
 	}
 
+	@Override
 	public OandaEnvironment getEnvironment() {
 		return environment;
 	}
 
+	@Override
 	public AccountID getAccountId() {
 		return new AccountID(credentials.getAccountId());
 	}
 
+	@Override
 	public Context getContext() {
-		return new Context(environment.getRestDomain(), credentials.getToken());
+		return new Context(environment.getRestUrl(), credentials.getToken());
 	}
 }

@@ -62,13 +62,14 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 		return request;
 	}
 
+	@Override
 	protected boolean failed(HttpUriRequest request, HttpResponse response) {
 		return response.getStatusLine().getStatusCode() != 200 || response.getEntity() == null;
 	}
 
 	private String getUrl(Collection<? extends IOandaInstrument> instruments) {
 		StringBuilder url = new StringBuilder();
-		url.append(session.getEnvironment().getStreamDomain());
+		url.append(session.getEnvironment().getStreamUrl());
 		url.append("/v3/accounts/");
 		url.append(session.getCredentials().getAccountId());
 		url.append("/pricing/stream?instruments=");
