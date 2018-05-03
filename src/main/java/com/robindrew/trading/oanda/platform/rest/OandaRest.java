@@ -2,8 +2,6 @@ package com.robindrew.trading.oanda.platform.rest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
 
 import com.oanda.v20.primitives.DateTime;
 import com.robindrew.common.date.Dates;

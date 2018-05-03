@@ -29,4 +29,9 @@ public class OandaSession implements IOandaSession {
 	public Context getContext() {
 		return new Context(environment.getRestDomain(), credentials.getToken());
 	}
+
+	@Override
+	public String toString() {
+		return credentials + "[" + environment + "]";
+	}
 }
