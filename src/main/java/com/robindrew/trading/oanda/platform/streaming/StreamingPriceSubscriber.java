@@ -16,12 +16,15 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.robindrew.common.util.Check;
 import com.robindrew.common.util.Quietly;
 import com.robindrew.trading.httpclient.HttpClientException;
 import com.robindrew.trading.httpclient.HttpClientExecutor;
 import com.robindrew.trading.oanda.IOandaInstrument;
 import com.robindrew.trading.oanda.platform.OandaSession;
+import com.robindrew.trading.price.candle.ITickPriceCandle;
 
 public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implements AutoCloseable {
 
@@ -31,6 +34,7 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 	private final Collection<? extends IOandaInstrument> instruments;
 
 	private final AtomicBoolean closed = new AtomicBoolean(false);
+	private final Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 	private volatile InputStream stream = null;
 
 	public StreamingPriceSubscriber(OandaSession session, Collection<? extends IOandaInstrument> instruments) {
@@ -60,11 +64,6 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 		request.addHeader("Authorization", "Bearer " + session.getCredentials().getToken());
 		request.addHeader("Accept-Datetime-Format", "UNIX");
 		return request;
-	}
-
-	@Override
-	protected boolean failed(HttpUriRequest request, HttpResponse response) {
-		return response.getStatusLine().getStatusCode() != 200 || response.getEntity() == null;
 	}
 
 	private String getUrl(Collection<? extends IOandaInstrument> instruments) {
@@ -107,12 +106,19 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 		}
 	}
 
-	private void handlePrice(String line) {
-		if (!line.contains("PRICE")) {
+	private void handlePrice(String json) {
+		if (!json.contains("PRICE")) {
 			return;
 		}
 
-		System.out.println(line);
+		try {
+			StreamingPriceTick tick = gson.fromJson(json, StreamingPriceTick.class);
+			IOandaInstrument instrument = tick.getOandaInstrument();
+			ITickPriceCandle candle = tick.toTickPriceCandle(instrument);
+
+		} catch (Exception e) {
+			log.warn("Error handling price: " + json, e);
+		}
 	}
 
 }

@@ -4,6 +4,8 @@ import static com.robindrew.trading.Instruments.*;
 
 import com.robindrew.trading.IInstrument;
 import com.robindrew.trading.Instrument;
+import com.robindrew.trading.price.precision.IPricePrecision;
+import com.robindrew.trading.price.precision.PricePrecision;
 
 public class OandaInstrument extends Instrument implements IOandaInstrument {
 
@@ -137,7 +139,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** USD/INR (CURRENCY). */
 	public static final OandaInstrument SPOT_USD_INR = new OandaInstrument("USD_INR", USD_INR);
 	/** USD/JPY (CURRENCY). */
-	public static final OandaInstrument SPOT_USD_JPY = new OandaInstrument("USD_JPY", USD_JPY);
+	public static final OandaInstrument SPOT_USD_JPY = new OandaInstrument("USD_JPY", USD_JPY, 4);
 	/** USD/MXN (CURRENCY). */
 	public static final OandaInstrument SPOT_USD_MXN = new OandaInstrument("USD_MXN", USD_MXN);
 	/** USD/NOK (CURRENCY). */
@@ -273,8 +275,278 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** Natural Gas (CFD). */
 	public static final OandaInstrument SPOT_NATGAS_USD = new OandaInstrument("NATGAS_USD", NATURAL_GAS);
 
+	public static OandaInstrument valueOf(String text) {
+		switch (text) {
+			case "AUD_CAD":
+				return SPOT_AUD_CAD;
+			case "AUD_CHF":
+				return SPOT_AUD_CHF;
+			case "AUD_HKD":
+				return SPOT_AUD_HKD;
+			case "AUD_JPY":
+				return SPOT_AUD_JPY;
+			case "AUD_NZD":
+				return SPOT_AUD_NZD;
+			case "AUD_SGD":
+				return SPOT_AUD_SGD;
+			case "AUD_USD":
+				return SPOT_AUD_USD;
+			case "CAD_CHF":
+				return SPOT_CAD_CHF;
+			case "CAD_HKD":
+				return SPOT_CAD_HKD;
+			case "CAD_JPY":
+				return SPOT_CAD_JPY;
+			case "CAD_SGD":
+				return SPOT_CAD_SGD;
+			case "CHF_HKD":
+				return SPOT_CHF_HKD;
+			case "CHF_JPY":
+				return SPOT_CHF_JPY;
+			case "CHF_ZAR":
+				return SPOT_CHF_ZAR;
+			case "EUR_AUD":
+				return SPOT_EUR_AUD;
+			case "EUR_CAD":
+				return SPOT_EUR_CAD;
+			case "EUR_CHF":
+				return SPOT_EUR_CHF;
+			case "EUR_CZK":
+				return SPOT_EUR_CZK;
+			case "EUR_DKK":
+				return SPOT_EUR_DKK;
+			case "EUR_GBP":
+				return SPOT_EUR_GBP;
+			case "EUR_HKD":
+				return SPOT_EUR_HKD;
+			case "EUR_HUF":
+				return SPOT_EUR_HUF;
+			case "EUR_JPY":
+				return SPOT_EUR_JPY;
+			case "EUR_NOK":
+				return SPOT_EUR_NOK;
+			case "EUR_NZD":
+				return SPOT_EUR_NZD;
+			case "EUR_PLN":
+				return SPOT_EUR_PLN;
+			case "EUR_SEK":
+				return SPOT_EUR_SEK;
+			case "EUR_SGD":
+				return SPOT_EUR_SGD;
+			case "EUR_TRY":
+				return SPOT_EUR_TRY;
+			case "EUR_USD":
+				return SPOT_EUR_USD;
+			case "EUR_ZAR":
+				return SPOT_EUR_ZAR;
+			case "GBP_AUD":
+				return SPOT_GBP_AUD;
+			case "GBP_CAD":
+				return SPOT_GBP_CAD;
+			case "GBP_CHF":
+				return SPOT_GBP_CHF;
+			case "GBP_HKD":
+				return SPOT_GBP_HKD;
+			case "GBP_JPY":
+				return SPOT_GBP_JPY;
+			case "GBP_NZD":
+				return SPOT_GBP_NZD;
+			case "GBP_PLN":
+				return SPOT_GBP_PLN;
+			case "GBP_SGD":
+				return SPOT_GBP_SGD;
+			case "GBP_USD":
+				return SPOT_GBP_USD;
+			case "GBP_ZAR":
+				return SPOT_GBP_ZAR;
+			case "HKD_JPY":
+				return SPOT_HKD_JPY;
+			case "NZD_CAD":
+				return SPOT_NZD_CAD;
+			case "NZD_CHF":
+				return SPOT_NZD_CHF;
+			case "NZD_HKD":
+				return SPOT_NZD_HKD;
+			case "NZD_JPY":
+				return SPOT_NZD_JPY;
+			case "NZD_SGD":
+				return SPOT_NZD_SGD;
+			case "NZD_USD":
+				return SPOT_NZD_USD;
+			case "SGD_CHF":
+				return SPOT_SGD_CHF;
+			case "SGD_HKD":
+				return SPOT_SGD_HKD;
+			case "SGD_JPY":
+				return SPOT_SGD_JPY;
+			case "TRY_JPY":
+				return SPOT_TRY_JPY;
+			case "USD_CAD":
+				return SPOT_USD_CAD;
+			case "USD_CHF":
+				return SPOT_USD_CHF;
+			case "USD_CNH":
+				return SPOT_USD_CNH;
+			case "USD_CZK":
+				return SPOT_USD_CZK;
+			case "USD_DKK":
+				return SPOT_USD_DKK;
+			case "USD_HKD":
+				return SPOT_USD_HKD;
+			case "USD_HUF":
+				return SPOT_USD_HUF;
+			case "USD_INR":
+				return SPOT_USD_INR;
+			case "USD_JPY":
+				return SPOT_USD_JPY;
+			case "USD_MXN":
+				return SPOT_USD_MXN;
+			case "USD_NOK":
+				return SPOT_USD_NOK;
+			case "USD_PLN":
+				return SPOT_USD_PLN;
+			case "USD_SAR":
+				return SPOT_USD_SAR;
+			case "USD_SEK":
+				return SPOT_USD_SEK;
+			case "USD_SGD":
+				return SPOT_USD_SGD;
+			case "USD_THB":
+				return SPOT_USD_THB;
+			case "USD_TRY":
+				return SPOT_USD_TRY;
+			case "USD_ZAR":
+				return SPOT_USD_ZAR;
+			case "ZAR_JPY":
+				return SPOT_ZAR_JPY;
+			case "XAG_AUD":
+				return SPOT_XAG_AUD;
+			case "XAG_CAD":
+				return SPOT_XAG_CAD;
+			case "XAG_CHF":
+				return SPOT_XAG_CHF;
+			case "XAG_EUR":
+				return SPOT_XAG_EUR;
+			case "XAG_GBP":
+				return SPOT_XAG_GBP;
+			case "XAG_HKD":
+				return SPOT_XAG_HKD;
+			case "XAG_JPY":
+				return SPOT_XAG_JPY;
+			case "XAG_NZD":
+				return SPOT_XAG_NZD;
+			case "XAG_SGD":
+				return SPOT_XAG_SGD;
+			case "XAG_USD":
+				return SPOT_XAG_USD;
+			case "XAU_AUD":
+				return SPOT_XAU_AUD;
+			case "XAU_CAD":
+				return SPOT_XAU_CAD;
+			case "XAU_CHF":
+				return SPOT_XAU_CHF;
+			case "XAU_EUR":
+				return SPOT_XAU_EUR;
+			case "XAU_GBP":
+				return SPOT_XAU_GBP;
+			case "XAU_HKD":
+				return SPOT_XAU_HKD;
+			case "XAU_JPY":
+				return SPOT_XAU_JPY;
+			case "XAU_NZD":
+				return SPOT_XAU_NZD;
+			case "XAU_SGD":
+				return SPOT_XAU_SGD;
+			case "XAU_USD":
+				return SPOT_XAU_USD;
+			case "XAU_XAG":
+				return SPOT_XAU_XAG;
+			case "XPD_USD":
+				return SPOT_XPD_USD;
+			case "XPT_USD":
+				return SPOT_XPT_USD;
+			case "AU200_AUD":
+				return CFD_AU200_AUD;
+			case "CN50_USD":
+				return CFD_CN50_USD;
+			case "DE30_EUR":
+				return CFD_DE30_EUR;
+			case "EU50_EUR":
+				return CFD_EU50_EUR;
+			case "FR40_EUR":
+				return CFD_FR40_EUR;
+			case "HK33_HKD":
+				return CFD_HK33_HKD;
+			case "IN50_USD":
+				return CFD_IN50_USD;
+			case "JP225_USD":
+				return CFD_JP225_USD;
+			case "NAS100_USD":
+				return CFD_NAS100_USD;
+			case "NL25_EUR":
+				return CFD_NL25_EUR;
+			case "SG30_SGD":
+				return CFD_SG30_SGD;
+			case "SPX500_USD":
+				return CFD_SPX500_USD;
+			case "TWIX_USD":
+				return CFD_TWIX_USD;
+			case "UK100_GBP":
+				return CFD_UK100_GBP;
+			case "US30_USD":
+				return CFD_US30_USD;
+			case "US2000_USD":
+				return CFD_US2000_USD;
+			case "DE10YB_EUR":
+				return CFD_DE10YB_EUR;
+			case "UK10YB_GBP":
+				return CFD_UK10YB_GBP;
+			case "USB02Y_USD":
+				return CFD_USB02Y_USD;
+			case "USB05Y_USD":
+				return CFD_USB05Y_USD;
+			case "USB10Y_USD":
+				return CFD_USB10Y_USD;
+			case "USB30Y_USD":
+				return CFD_USB30Y_USD;
+			case "XCU_USD":
+				return SPOT_XCU_USD;
+			case "WHEAT_USD":
+				return SPOT_WHEAT_USD;
+			case "CORN_USD":
+				return SPOT_CORN_USD;
+			case "SOYBN_USD":
+				return SPOT_SOYBN_USD;
+			case "SUGAR_USD":
+				return SPOT_SUGAR_USD;
+			case "WTICO_USD":
+				return SPOT_WTICO_USD;
+			case "BCO_USD":
+				return SPOT_BCO_USD;
+			case "NATGAS_USD":
+				return SPOT_NATGAS_USD;
+			default:
+				throw new IllegalArgumentException("Not found: '" + text + "'");
+		}
+	}
+
+	private final IPricePrecision precision;
+
 	public OandaInstrument(String name, IInstrument underlying) {
+		this(name, underlying, Integer.MIN_VALUE);
+	}
+
+	public OandaInstrument(String name, IInstrument underlying, int decimalPlaces) {
 		super(name, underlying);
+		this.precision = (decimalPlaces == Integer.MIN_VALUE) ? null : new PricePrecision(decimalPlaces);
+	}
+
+	@Override
+	public IPricePrecision getPrecision() {
+		if (precision == null) {
+			throw new UnsupportedOperationException("Price precision not specified for instrument: " + getName());
+		}
+		return precision;
 	}
 
 }
