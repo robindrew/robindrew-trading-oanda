@@ -22,7 +22,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** AUD/SGD (CURRENCY). */
 	public static final OandaInstrument SPOT_AUD_SGD = new OandaInstrument("AUD_SGD", AUD_SGD);
 	/** AUD/USD (CURRENCY). */
-	public static final OandaInstrument SPOT_AUD_USD = new OandaInstrument("AUD_USD", AUD_USD);
+	public static final OandaInstrument SPOT_AUD_USD = new OandaInstrument("AUD_USD", AUD_USD, 6);
 
 	/** CAD/CHF (CURRENCY). */
 	public static final OandaInstrument SPOT_CAD_CHF = new OandaInstrument("CAD_CHF", CAD_CHF);
@@ -57,7 +57,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** EUR/HUF (CURRENCY). */
 	public static final OandaInstrument SPOT_EUR_HUF = new OandaInstrument("EUR_HUF", EUR_HUF);
 	/** EUR/JPY (CURRENCY). */
-	public static final OandaInstrument SPOT_EUR_JPY = new OandaInstrument("EUR_JPY", EUR_JPY);
+	public static final OandaInstrument SPOT_EUR_JPY = new OandaInstrument("EUR_JPY", EUR_JPY, 4);
 	/** EUR/NOK (CURRENCY). */
 	public static final OandaInstrument SPOT_EUR_NOK = new OandaInstrument("EUR_NOK", EUR_NOK);
 	/** EUR/NZD (CURRENCY). */
@@ -71,7 +71,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** EUR/TRY (CURRENCY). */
 	public static final OandaInstrument SPOT_EUR_TRY = new OandaInstrument("EUR_TRY", EUR_TRY);
 	/** EUR/USD (CURRENCY). */
-	public static final OandaInstrument SPOT_EUR_USD = new OandaInstrument("EUR_USD", EUR_USD);
+	public static final OandaInstrument SPOT_EUR_USD = new OandaInstrument("EUR_USD", EUR_USD, 6);
 	/** EUR/ZAR (CURRENCY). */
 	public static final OandaInstrument SPOT_EUR_ZAR = new OandaInstrument("EUR_ZAR", EUR_ZAR);
 
@@ -92,7 +92,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** GBP/SGD (CURRENCY). */
 	public static final OandaInstrument SPOT_GBP_SGD = new OandaInstrument("GBP_SGD", GBP_SGD);
 	/** GBP/USD (CURRENCY). */
-	public static final OandaInstrument SPOT_GBP_USD = new OandaInstrument("GBP_USD", GBP_USD);
+	public static final OandaInstrument SPOT_GBP_USD = new OandaInstrument("GBP_USD", GBP_USD, 6);
 	/** GBP/ZAR (CURRENCY). */
 	public static final OandaInstrument SPOT_GBP_ZAR = new OandaInstrument("GBP_ZAR", GBP_ZAR);
 
