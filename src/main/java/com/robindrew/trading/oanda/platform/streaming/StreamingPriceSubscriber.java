@@ -18,12 +18,14 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.robindrew.common.date.Dates;
 import com.robindrew.common.util.Check;
 import com.robindrew.common.util.Quietly;
 import com.robindrew.trading.httpclient.HttpClientException;
 import com.robindrew.trading.httpclient.HttpClientExecutor;
 import com.robindrew.trading.oanda.IOandaInstrument;
 import com.robindrew.trading.oanda.platform.OandaSession;
+import com.robindrew.trading.oanda.platform.streaming.event.StreamingEvent;
 import com.robindrew.trading.price.candle.ITickPriceCandle;
 
 public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implements AutoCloseable {
@@ -102,23 +104,39 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 	private void handlePrices(HttpEntity entity) throws Exception {
 		stream = entity.getContent();
 		for (String line : lines(stream)) {
-			handlePrice(line);
+			handleEvent(line);
 		}
 	}
 
-	private void handlePrice(String json) {
-		if (!json.contains("PRICE")) {
-			return;
-		}
-
+	private boolean handleEvent(String json) {
 		try {
-			StreamingPriceTick tick = gson.fromJson(json, StreamingPriceTick.class);
-			IOandaInstrument instrument = tick.getOandaInstrument();
-			ITickPriceCandle candle = tick.toTickPriceCandle(instrument);
+			StreamingEvent event = gson.fromJson(json, StreamingEvent.class);
 
+			switch (event.getType()) {
+				case StreamingEvent.TYPE_PRICE:
+					return handlePrice(event);
+				case StreamingEvent.TYPE_HEARTBEAT:
+					return handleHeartbeat(event);
+				default:
+					log.warn("Unknown event: '{}'", json);
+					return false;
+			}
 		} catch (Exception e) {
-			log.warn("Error handling price: " + json, e);
+			log.warn("Error handling event: " + json, e);
+			return false;
 		}
+	}
+
+	private boolean handleHeartbeat(StreamingEvent tick) {
+		log.info("[Heartbeat Event] {}", Dates.formatMillis("yyyy-MM-dd HH:mm:ss,S", tick.getTime()));
+		return true;
+	}
+
+	private boolean handlePrice(StreamingEvent tick) {
+		IOandaInstrument instrument = tick.getOandaInstrument();
+		ITickPriceCandle candle = tick.toTickPriceCandle(instrument);
+		log.info("[Price Event] {}", candle);
+		return true;
 	}
 
 }

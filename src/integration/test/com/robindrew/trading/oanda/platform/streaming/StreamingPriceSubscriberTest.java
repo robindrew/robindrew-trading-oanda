@@ -8,6 +8,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
+import com.robindrew.common.test.UnitTests;
 import com.robindrew.trading.oanda.IOandaInstrument;
 import com.robindrew.trading.oanda.platform.OandaCredentials;
 import com.robindrew.trading.oanda.platform.OandaEnvironment;
@@ -18,8 +19,8 @@ public class StreamingPriceSubscriberTest {
 	@Test
 	public void subscribe() {
 
-		String accountId = System.getProperty("accountId");
-		String token = System.getProperty("token");
+		String accountId = UnitTests.getProperty("accountId");
+		String token = UnitTests.getProperty("token");
 
 		OandaCredentials credentials = new OandaCredentials(accountId, token);
 		OandaSession session = new OandaSession(credentials, OandaEnvironment.DEMO);
