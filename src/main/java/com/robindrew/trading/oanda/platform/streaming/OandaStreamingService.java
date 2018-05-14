@@ -3,16 +3,16 @@ package com.robindrew.trading.oanda.platform.streaming;
 import static com.robindrew.trading.provider.TradingProvider.OANDA;
 
 import com.robindrew.trading.oanda.IOandaInstrument;
-import com.robindrew.trading.oanda.platform.OandaSession;
+import com.robindrew.trading.oanda.platform.IOandaSession;
 import com.robindrew.trading.platform.streaming.AbstractStreamingService;
 import com.robindrew.trading.platform.streaming.IInstrumentPriceStream;
 
 public class OandaStreamingService extends AbstractStreamingService<IOandaInstrument> implements IOandaStreamingService {
 
-	private final OandaSession session;
+	private final IOandaSession session;
 	private StreamingPriceSubscriber subscriber = null;
 
-	public OandaStreamingService(OandaSession session) {
+	public OandaStreamingService(IOandaSession session) {
 		super(OANDA);
 		this.session = session;
 	}

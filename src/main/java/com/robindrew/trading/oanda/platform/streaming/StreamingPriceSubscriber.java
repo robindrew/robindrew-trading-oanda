@@ -26,7 +26,7 @@ import com.robindrew.common.util.Check;
 import com.robindrew.trading.httpclient.HttpClientException;
 import com.robindrew.trading.httpclient.HttpClientExecutor;
 import com.robindrew.trading.oanda.IOandaInstrument;
-import com.robindrew.trading.oanda.platform.OandaSession;
+import com.robindrew.trading.oanda.platform.IOandaSession;
 import com.robindrew.trading.oanda.platform.streaming.event.StreamingEvent;
 import com.robindrew.trading.platform.streaming.IInstrumentPriceStream;
 import com.robindrew.trading.price.candle.ITickPriceCandle;
@@ -37,14 +37,14 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 
 	private static final AtomicLong nextId = new AtomicLong(0);
 
-	private final OandaSession session;
+	private final IOandaSession session;
 	private final Map<IOandaInstrument, IInstrumentPriceStream<IOandaInstrument>> streamMap = new LinkedHashMap<>();
 
 	private final AtomicBoolean closed = new AtomicBoolean(false);
 	private final Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 	private volatile InputStream lineStream = null;
 
-	public StreamingPriceSubscriber(OandaSession session, Collection<? extends IInstrumentPriceStream<IOandaInstrument>> streams) {
+	public StreamingPriceSubscriber(IOandaSession session, Collection<? extends IInstrumentPriceStream<IOandaInstrument>> streams) {
 		this.session = Check.notNull("session", session);
 		notEmpty("streams", streams);
 
@@ -196,6 +196,7 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 			return this;
 		}
 
+		@Override
 		public void run() {
 			try {
 				execute();
