@@ -168,7 +168,7 @@ public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implem
 		}
 
 		ITickPriceCandle candle = tick.toTickPriceCandle(instrument);
-		log.info("[Price Event] {} -> {}", instrument, candle);
+		log.debug("[Price Event] {} -> {}", instrument, candle);
 		stream.putNextCandle(candle);
 		return true;
 	}

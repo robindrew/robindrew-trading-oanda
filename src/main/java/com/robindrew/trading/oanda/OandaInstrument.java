@@ -125,7 +125,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** USD/CAD (CURRENCY). */
 	public static final OandaInstrument SPOT_USD_CAD = new OandaInstrument("USD_CAD", USD_CAD);
 	/** USD/CHF (CURRENCY). */
-	public static final OandaInstrument SPOT_USD_CHF = new OandaInstrument("USD_CHF", USD_CHF);
+	public static final OandaInstrument SPOT_USD_CHF = new OandaInstrument("USD_CHF", USD_CHF, 6);
 	/** USD/CNH (CURRENCY). */
 	public static final OandaInstrument SPOT_USD_CNH = new OandaInstrument("USD_CNH", USD_CNH);
 	/** USD/CZK (CURRENCY). */
@@ -181,7 +181,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** Silver/SGD (METAL). */
 	public static final OandaInstrument SPOT_XAG_SGD = new OandaInstrument("XAG_SGD", XAG_SGD);
 	/** Silver (METAL). */
-	public static final OandaInstrument SPOT_XAG_USD = new OandaInstrument("XAG_USD", XAG_USD);
+	public static final OandaInstrument SPOT_XAG_USD = new OandaInstrument("XAG_USD", XAG_USD, 6);
 
 	/** Gold/AUD (METAL). */
 	public static final OandaInstrument SPOT_XAU_AUD = new OandaInstrument("XAU_AUD", XAU_AUD);
@@ -202,7 +202,7 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** Gold/SGD (METAL). */
 	public static final OandaInstrument SPOT_XAU_SGD = new OandaInstrument("XAU_SGD", XAU_SGD);
 	/** Gold (METAL). */
-	public static final OandaInstrument SPOT_XAU_USD = new OandaInstrument("XAU_USD", XAU_USD);
+	public static final OandaInstrument SPOT_XAU_USD = new OandaInstrument("XAU_USD", XAU_USD, 4);
 	/** Gold/Silver (METAL). */
 	public static final OandaInstrument SPOT_XAU_XAG = new OandaInstrument("XAU_XAG", XAU_XAG);
 
@@ -238,9 +238,9 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	/** Taiwan Index (CFD). */
 	public static final OandaInstrument CFD_TWIX_USD = new OandaInstrument("TWIX_USD", TAIEX);
 	/** UK 100 (CFD). */
-	public static final OandaInstrument CFD_UK100_GBP = new OandaInstrument("UK100_GBP", FTSE_100);
+	public static final OandaInstrument CFD_UK100_GBP = new OandaInstrument("UK100_GBP", FTSE_100, 2);
 	/** US Wall St 30 (CFD). */
-	public static final OandaInstrument CFD_US30_USD = new OandaInstrument("US30_USD", DOW_JONES_30);
+	public static final OandaInstrument CFD_US30_USD = new OandaInstrument("US30_USD", DOW_JONES_30, 2);
 	/** US Russ 2000 (CFD). */
 	public static final OandaInstrument CFD_US2000_USD = new OandaInstrument("US2000_USD", RUSSELL_2000);
 
@@ -269,9 +269,9 @@ public class OandaInstrument extends Instrument implements IOandaInstrument {
 	public static final OandaInstrument SPOT_SUGAR_USD = new OandaInstrument("SUGAR_USD", SUGAR);
 
 	/** West Texas Oil (CFD). */
-	public static final OandaInstrument SPOT_WTICO_USD = new OandaInstrument("WTICO_USD", US_CRUDE_OIL);
+	public static final OandaInstrument SPOT_WTICO_USD = new OandaInstrument("WTICO_USD", US_CRUDE_OIL, 4);
 	/** Brent Crude Oil (CFD). */
-	public static final OandaInstrument SPOT_BCO_USD = new OandaInstrument("BCO_USD", BRENT_CRUDE_OIL);
+	public static final OandaInstrument SPOT_BCO_USD = new OandaInstrument("BCO_USD", BRENT_CRUDE_OIL, 4);
 	/** Natural Gas (CFD). */
 	public static final OandaInstrument SPOT_NATGAS_USD = new OandaInstrument("NATGAS_USD", NATURAL_GAS);
 
