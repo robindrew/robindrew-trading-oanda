@@ -1,0 +1,11 @@
+<release>
+   <groupId>com.robindrew</groupId>
+   <artifactId>robindrew-trading-oanda</artifactId>
+   <version>3.0</version>
+   <releaseVersions>
+      <releaseVersion>
+         <hash>c4f337477ba62b0ca6085bea945d0af6</hash>
+         <version>3.0.1</version>
+      </releaseVersion>
+   </releaseVersions>
+</release>
