@@ -27,6 +27,10 @@ public class CreateOrderExecutor extends OandaRestExecutor<Boolean> {
 		return response.getStatusLine().getStatusCode() == 201 && response.getEntity() != null;
 	}
 
+	public IPositionOrder getOrder() {
+		return order;
+	}
+
 	@Override
 	protected HttpUriRequest createRequest() throws Exception {
 		HttpPost request = new HttpPost(getUrl("/v3/accounts/" + accountId + "/orders"));
