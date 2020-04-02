@@ -29,7 +29,7 @@ import com.robindrew.trading.oanda.IOandaInstrument;
 import com.robindrew.trading.oanda.platform.IOandaSession;
 import com.robindrew.trading.oanda.platform.streaming.event.StreamingEvent;
 import com.robindrew.trading.platform.streaming.IInstrumentPriceStream;
-import com.robindrew.trading.price.candle.ITickPriceCandle;
+import com.robindrew.trading.price.candle.tick.ITickPriceCandle;
 
 public class StreamingPriceSubscriber extends HttpClientExecutor<Boolean> implements AutoCloseable {
 

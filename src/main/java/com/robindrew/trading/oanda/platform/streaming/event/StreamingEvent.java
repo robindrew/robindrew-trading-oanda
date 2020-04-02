@@ -7,8 +7,8 @@ import com.robindrew.common.text.Strings;
 import com.robindrew.trading.oanda.IOandaInstrument;
 import com.robindrew.trading.oanda.OandaInstrument;
 import com.robindrew.trading.oanda.platform.rest.OandaRest;
-import com.robindrew.trading.price.candle.ITickPriceCandle;
-import com.robindrew.trading.price.candle.TickPriceCandle;
+import com.robindrew.trading.price.candle.tick.ITickPriceCandle;
+import com.robindrew.trading.price.candle.tick.TickPriceCandle;
 import com.robindrew.trading.price.precision.IPricePrecision;
 
 public class StreamingEvent {
